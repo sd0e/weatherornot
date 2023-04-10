@@ -34,10 +34,10 @@ class DataManager(app: Application) : AndroidViewModel(app) {
         return foundValue ?: Locations.London
     }
 
-    private fun fetchData() {
+    private fun fetchData(latitude: Double, longitude: Double, currentWeather: String, hourly: String) {
         try {
             viewModelScope.launch {
-                weather = API.weatherService.getWeather().body()
+                weather = API.weatherService.getWeather(latitude, longitude, currentWeather, hourly).body()
             }
         } catch (ex: Exception) {
             weather = null
@@ -46,6 +46,6 @@ class DataManager(app: Application) : AndroidViewModel(app) {
 
     init {
         val locationInfo = findLocationObject(location)
-        fetchData(locationInfo.latitude, locationInfo.longitude, "true")
+        fetchData(latitude = locationInfo.latitude, longitude = locationInfo.longitude, currentWeather = "true", hourly = "temperature_2m,relativehumidity_2m,windspeed_10m")
     }
 }

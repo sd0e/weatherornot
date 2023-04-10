@@ -6,5 +6,5 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SettingsPage(dataManager: DataManager) {
-    Dropdown(options = locationIDs, selectedText = dataManager.location, onSelectedChange = { loc -> dataManager.location = loc })
+    Dropdown(options = dataManager.locationIDs, selectedText = dataManager.location, onSelectedChange = { loc -> dataManager.location = loc })
 }
