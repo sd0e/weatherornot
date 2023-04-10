@@ -44,8 +44,12 @@ class DataManager(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    init {
+    fun refresh() {
         val locationInfo = findLocationObject(location)
         fetchData(latitude = locationInfo.latitude, longitude = locationInfo.longitude, currentWeather = "true", hourly = "temperature_2m,relativehumidity_2m,windspeed_10m")
+    }
+
+    init {
+        refresh()
     }
 }
