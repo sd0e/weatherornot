@@ -5,6 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SettingsPage(currentLocation: String, newLocation: (String) -> Unit) {
-    Dropdown(options = locationIDs, selectedText = currentLocation, onSelectedChange = { loc -> newLocation(loc) })
+fun SettingsPage(dataManager: DataManager) {
+    Dropdown(options = locationIDs, selectedText = dataManager.location, onSelectedChange = { loc -> dataManager.location = loc })
 }

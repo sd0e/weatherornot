@@ -19,35 +19,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-object Locations {
-    val London = Location(id = "London", region = "Greater London", latitude = 51.50, longitude = -0.13)
-    val Manchester = Location(id = "Manchester", region = "Greater Manchester", latitude = 53.48, longitude = -2.24)
-    val Plymouth = Location(id = "Plymouth", region = "Devon", latitude = 50.38, longitude = -4.14)
-    val Sheffield = Location(id = "Sheffield", region = "South Yorkshire", latitude = 53.38, -1.47)
-    val Norwich = Location(id = "Norwich", region = "Norfolk", latitude = 52.63, 1.30)
-    val Southampton = Location(id = "Southampton", region = "Hampshire", latitude = 50.91, longitude = -1.40)
-
-    val locationsArray = arrayOf(London, Manchester, Plymouth, Sheffield, Norwich, Southampton)
-}
-
-val locationIDs = arrayOf(
-    "London", "Manchester", "Plymouth", "Sheffield", "Norwich", "Southampton"
-)
-
-fun findLocationObject(id: String = "London"): Location {
-    val foundValue: Location? = Locations.locationsArray.find { it.id == id }
-    return foundValue ?: Locations.London
-}
-
-@Preview
 @Composable
-fun App() {
+fun App(dataManager: DataManager) {
     var selectedRoute = remember {
         mutableStateOf(Routes.HomePage.route)
-    }
-
-    var currentLocation by remember {
-        mutableStateOf(locationIDs[0])
     }
 
     Scaffold(
@@ -58,10 +33,8 @@ fun App() {
         },
         content = {
             when (selectedRoute.value) {
-                Routes.HomePage.route -> HomePage(currentLocation)
-                Routes.SettingsPage.route -> SettingsPage(currentLocation) { newLocation ->
-                    currentLocation = newLocation;
-                }
+                Routes.HomePage.route -> HomePage(dataManager)
+                Routes.SettingsPage.route -> SettingsPage(dataManager)
             }
         },
         bottomBar = {
