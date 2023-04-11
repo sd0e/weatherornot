@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sebdoe.weatherornot.ui.theme.Alternative1
 import com.sebdoe.weatherornot.ui.theme.OnPrimary
+import com.sebdoe.weatherornot.ui.theme.Primary
 
 data class NavPage(var name: String, var icon: ImageVector, var route: String)
 
@@ -37,7 +38,7 @@ fun NavBar(selectedRoute: String = Routes.HomePage.route, onChange: (String)->Un
                 selected = selectedRoute == page.route,
                 modifier = Modifier.clickable {
                     onChange(page.route)
-                })
+                }.padding(8.dp))
         }
     }
 }
@@ -50,7 +51,7 @@ fun NavBarItem(page: NavPage, selected: Boolean = false, modifier: Modifier = Mo
             imageVector = page.icon,
             contentDescription = page.name,
             colorFilter = ColorFilter.tint(
-                if (selected) Alternative1 else OnPrimary
+                if (selected) Primary else OnPrimary
             ),
             modifier = Modifier
                 .padding(bottom = 8.dp)
@@ -58,7 +59,7 @@ fun NavBarItem(page: NavPage, selected: Boolean = false, modifier: Modifier = Mo
         )
         Text(page.name,
             fontSize = 12.sp,
-            color = if (selected) Alternative1 else OnPrimary
+            color = if (selected) Primary else OnPrimary
         )
     }
 }
