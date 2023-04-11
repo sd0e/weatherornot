@@ -19,5 +19,6 @@ fun HomePage(dataManager: DataManager) {
         Text(text = "Current Location: ${dataManager.location}")
         Text(text = "Region: ${dataManager.findLocationObject(dataManager.location).region}")
         Text(text = "Elevation of location: ${dataManager.weather?.elevation}")
+        Text(text = "Current temperature: ${dataManager.weather?.current_weather?.temperature}${dataManager.weather?.hourly_units?.temperature_2m}")
     }
 }
