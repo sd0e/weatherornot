@@ -10,6 +10,9 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +20,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sebdoe.weatherornot.Routes.pages
 import com.sebdoe.weatherornot.ui.theme.Alternative1
 import com.sebdoe.weatherornot.ui.theme.OnPrimary
 import com.sebdoe.weatherornot.ui.theme.Primary
@@ -32,7 +36,17 @@ object Routes {
 
 @Composable
 fun NavBar(selectedRoute: String = Routes.HomePage.route, onChange: (String)->Unit) {
-    Row() {
+    NavigationBar {
+        pages.forEachIndexed { _, item ->
+            NavigationBarItem(
+                selected = item.route == selectedRoute,
+                label = { androidx.compose.material3.Text(text = item.name) },
+                icon = { Icon(item.icon, contentDescription = item.name) },
+                onClick = { onChange(item.route) }
+            )
+        }
+    }
+    /*Row() {
         for (page in Routes.pages) {
             NavBarItem(page = page,
                 selected = selectedRoute == page.route,
@@ -40,9 +54,10 @@ fun NavBar(selectedRoute: String = Routes.HomePage.route, onChange: (String)->Un
                     onChange(page.route)
                 }.padding(8.dp))
         }
-    }
+    }*/
 }
 
+/*
 @Composable
 fun NavBarItem(page: NavPage, selected: Boolean = false, modifier: Modifier = Modifier) {
     Column(horizontalAlignment = Alignment.CenterHorizontally,
@@ -62,4 +77,4 @@ fun NavBarItem(page: NavPage, selected: Boolean = false, modifier: Modifier = Mo
             color = if (selected) Primary else OnPrimary
         )
     }
-}
+}*/
